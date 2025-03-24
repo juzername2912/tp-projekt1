@@ -73,7 +73,7 @@ void BST_insert(wezel*& r, int x)
 		wezel* nowy = new wezel;
 		nowy->value = x;
 		nowy->right = NULL;
-		nowy->left = NULL;/aaaa
+		nowy->left = NULL;
 		r = nowy; // dowiązanie nowego węzła
 		// do węzła "wyższego poziomu"
 	}
