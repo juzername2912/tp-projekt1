@@ -104,7 +104,6 @@ void BT_preorder(wezel * r)
 		}
 	}
 
-
 void rysowanie(wezel* r, int depth, vector <int> branches)
 {	// to jest zainspirowane BT_preorder
 	depth++;
@@ -143,12 +142,8 @@ void rysowanie(wezel* r, int depth, vector <int> branches)
 		branches.pop_back();
 		branches.push_back(0);
 		
-		
 		rysowanie(r->left, depth,branches);
 	}
-
-
-
 }
 
 void usuwanie(wezel*& r, int x) {
@@ -160,7 +155,6 @@ void usuwanie(wezel*& r, int x) {
 			return usuwanie(r->left, x);
 		else
 			return usuwanie(r->right, x);
-	
 }
 
 bool copy_check(int wstaw,int tab[100]){
