@@ -7,7 +7,7 @@ struct wezel {
 	wezel* right;
 	wezel* left;
 };
-
+bool copy_check(int wstaw,int tab[100]); // sprawdza czy są jakieś kopie w podanych wartościach
 void BST_insert(wezel*& r, int x);//dołącza do drzewa węzeł o wartości x w odpowiednim miejscu
 wezel* BST_search(wezel*&r, int x);// znajduje węzeł o wartości x w drzewie binarny
 void BT_preorder(wezel* r);//wyszukiuje i wypisuje wartosci w drzewie od położenia?
@@ -16,16 +16,20 @@ void usuwanie(wezel*& r,int x);
 
 int main(void)
 {
-	
-	int wstawiany;
+	int wstawiany=1, tab_powtorzen[100]; //tabela powtórzeń żeby liczby sie nie powtarzały
+	for(int t=0;t<50;t++){tab_powtorzen[t]=0;}
 	wezel* root =NULL;
 	int i = 1;
-	cout << "w" << i++ << ": ";
-	cin >> wstawiany;
 	while (wstawiany != 0) {
-		BST_insert(root, wstawiany);
-		cout << "w" << i++ << ": ";
+		cout << "w" << i << ": ";
 		cin >> wstawiany;
+		if(copy_check(wstawiany, tab_powtorzen)){
+			cout<<"ta liczba juz wystepuje prosze wpisac inna"<<endl;
+		}else{
+			i++;
+			tab_powtorzen[i-1]=wstawiany;
+			BST_insert(root, wstawiany);
+		}
 	}
 	while(true)
 	{ 
@@ -45,7 +49,6 @@ int main(void)
 		break;
 	case 'r':
 		system("cls");
-		
 		rysowanie(root, depth);
 		break;
 	case 'u':
@@ -54,7 +57,7 @@ int main(void)
 		int x;
 		cin >> x;
 		usuwanie(root,x);
-			break;
+		break;
 	case'w':
 		return 0;
 		break;
@@ -73,7 +76,7 @@ void BST_insert(wezel*& r, int x)
 		wezel* nowy = new wezel;
 		nowy->value = x;
 		nowy->right = NULL;
-		nowy->left = NULL;/aaaa
+		nowy->left = NULL; //aaaa
 		r = nowy; // dowiązanie nowego węzła
 		// do węzła "wyższego poziomu"
 	}
@@ -136,4 +139,13 @@ void usuwanie(wezel*& r, int x) {
 		else
 			return usuwanie(r->right, x);
 	
+}
+
+bool copy_check(int wstaw,int tab[100]){
+	for(int j=1;j<50;j++){
+			if(tab[j]==wstaw){cout<<endl;
+				return true;
+			}
+		}
+	return false;
 }
