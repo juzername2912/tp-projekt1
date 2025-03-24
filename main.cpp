@@ -105,7 +105,7 @@ void BT_preorder(wezel * r)
 	}
 
 
-void rysowanie(wezel* r, int depth)
+void rysowanie(wezel* r, int depth, vector <int> branches)
 {	// to jest zainspirowane BT_preorder
 	depth++;
 	if (r != NULL) {
@@ -114,18 +114,40 @@ void rysowanie(wezel* r, int depth)
 			cout << " - - - - - - - ";// jesli jestesmy na wezle innym niz root to dodajemy to przed liczbą
 		}
 		cout << r->value;
-		rysowanie(r->right, depth);
-		if (r->left != NULL) { cout << endl; cout << endl; }//tu sie staram zrobic odstępy między gałęziami
+		
+		
+		if (r->left == NULL){ 
+			branches.push_back(0);
+		}else branches.push_back(1);
+		
+		rysowanie(r->right, depth,branches);
+		
+		
+		if (r->left != NULL) {
+			cout << endl; 
+			for (int j = 0; j < branches.size(); j++)
+			{
+				if (branches[j] == 1) {
+					cout << "|              "; 
+				}
+				else				  cout << "               ";
+			}cout << endl;					  
+		}
 		
 		for (int j = 1; j < depth; j++)
 		{
 			cout << "               ";//a tu sie staram zrobic wcięcia poprzedzające gałęzię
-			if (j == depth - 1 and r->left!=NULL) cout << "|";
 		}
-		rysowanie(r->left, depth);
+		
+		
+		branches.pop_back();
+		branches.push_back(0);
+		
+		
+		rysowanie(r->left, depth,branches);
 	}
-	
-	
+
+
 
 }
 
